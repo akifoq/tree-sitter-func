@@ -818,7 +818,7 @@
             "name": "function",
             "content": {
               "type": "SYMBOL",
-              "name": "_expr100"
+              "name": "_nontype_expr100"
             }
           },
           {
@@ -1032,7 +1032,7 @@
         ]
       }
     },
-    "_expr100": {
+    "_nontype_expr100": {
       "type": "PREC",
       "value": 100,
       "content": {
@@ -1056,10 +1056,6 @@
           },
           {
             "type": "SYMBOL",
-            "name": "type_expression"
-          },
-          {
-            "type": "SYMBOL",
             "name": "primitive_type"
           },
           {
@@ -1073,6 +1069,23 @@
           {
             "type": "SYMBOL",
             "name": "underscore"
+          }
+        ]
+      }
+    },
+    "_expr100": {
+      "type": "PREC",
+      "value": 100,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "type_expression"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_nontype_expr100"
           }
         ]
       }

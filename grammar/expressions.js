@@ -80,7 +80,7 @@ module.exports = {
     $.function_application
   )),
   function_application: $ => prec.left(90, seq(
-      field("function", $._expr100),
+      field("function", $._nontype_expr100),
       field("agruments", repeat1(choice(
         $.identifier,
         $.parenthesized_expression,
@@ -110,16 +110,20 @@ module.exports = {
   tensor_type_expression: $ => prec(101, seq('(', commaSep2($.type_expression), ')')),
   tuple_type_expression: $ => prec(101, seq('[', commaSep1($.type_expression), ']')),
 
-  _expr100: $ => prec(100, choice(
+  _nontype_expr100 : $ => prec(100, choice(
     $.parenthesized_expression,
     $.tensor_expression,
     $.tuple_expression,
     $.unit_literal,
-    $.type_expression,
     $.primitive_type,
     $.identifier,
     $.number_literal,
     $.underscore
+  )),
+
+  _expr100: $ => prec(100, choice(
+    $.type_expression,
+    $._nontype_expr100
   )),
 
   unit_literal: $ => '()',

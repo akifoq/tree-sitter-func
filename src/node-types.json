@@ -460,10 +460,6 @@
             "named": true
           },
           {
-            "type": "type_expression",
-            "named": true
-          },
-          {
             "type": "underscore",
             "named": true
           },
