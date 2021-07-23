@@ -1,5 +1,5 @@
 {
-  "name": "tree-sitter-func",
+  "name": "tree-sitter-func-language",
   "version": "0.0.0",
   "description": "FunC grammar for node-tree-sitter",
   "main": "bindings/node",
