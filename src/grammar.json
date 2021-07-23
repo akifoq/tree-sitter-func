@@ -561,11 +561,11 @@
                     },
                     {
                       "type": "STRING",
-                      "value": ">>~"
+                      "value": "~>>"
                     },
                     {
                       "type": "STRING",
-                      "value": ">>^"
+                      "value": "^>>"
                     }
                   ]
                 },
@@ -831,11 +831,11 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "parenthesized_expression"
+                    "name": "identifier"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "identifier"
+                    "name": "parenthesized_expression"
                   },
                   {
                     "type": "SYMBOL",

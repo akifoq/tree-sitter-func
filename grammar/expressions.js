@@ -37,7 +37,7 @@ module.exports = {
   _expr17: $ => prec.left(17, seq(
     $._expr20,
     repeat(seq(
-      choice('<<', '>>', '>>~', '>>^'),
+      choice('<<', '>>', '~>>', '^>>'),
       $._expr20
     ))
   )),
