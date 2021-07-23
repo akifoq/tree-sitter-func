@@ -1,6 +1,10 @@
 const {commaSep, commaSep1, commaSep2} = require('./utils.js')
 
 module.exports = {
+  // non-terminals are mostly borrowed from original parse-func.cpp (to be changed later)
+  // original parser assigns some flags (_IsLvalue, _IsRvalue, _IsNewVar, _IsType, ...) to every non-terminal symbol match and sometimes checks their fitness
+  // we mostly ignore this aspect, so we actually accept wider class of expression-like strings
+  // and ofcourse we don't do typechecking (it's not grammar task to do so)
   _expression: $ => $._expr10,
 
   _expr10: $ => prec(10, seq(
