@@ -1,0 +1,30 @@
+{
+  "name": "tree-sitter-func",
+  "version": "0.0.0",
+  "description": "FunC grammar for node-tree-sitter",
+  "main": "bindings/node",
+  "keywords": [
+    "parser",
+    "lexer"
+  ],
+  "author": "akifoq",
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.14.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.19.1"
+  },
+  "scripts": {
+    "build": "tree-sitter generate && node-gyp build",
+    "test": "tree-sitter test && tree-sitter parse examples/* --quiet --time"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.func",
+      "file-types": [
+        "fc"
+      ]
+    }
+  ]
+}
