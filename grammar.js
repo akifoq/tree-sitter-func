@@ -49,7 +49,7 @@ module.exports = grammar({
     string_literal: $ => /"[^"]*"/,
 
     // actually FunC identifiers are much more flexible
-    identifier: $ => /(`.*`)|([a-zA-Z_](\w|['?])+)|([a-zA-Z])/,
+    identifier: $ => /(`.*`)|([a-zA-Z_](\w|['?:])+)|([a-zA-Z])/,
     underscore: $ => '_',
 
     // multiline_comment: $ => seq('{-', repeat(choice(/./, $.multiline_comment)), '-}'),

@@ -17,6 +17,7 @@ module.exports = {
     optional(seq(
       '?',
       $._expression,
+      ':',
       $._expr13
     ))
   )),
@@ -77,6 +78,7 @@ module.exports = {
   function_application: $ => prec.left(90, seq(
       field("function", $._expr100),
       field("agruments", repeat1(choice(
+        $.identifier,
         $.parenthesized_expression,
         $.tensor_expression,
         $.unit_literal

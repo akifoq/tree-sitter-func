@@ -453,6 +453,10 @@
                     "name": "_expression"
                   },
                   {
+                    "type": "STRING",
+                    "value": ":"
+                  },
+                  {
                     "type": "SYMBOL",
                     "name": "_expr13"
                   }
@@ -828,6 +832,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "parenthesized_expression"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "identifier"
                   },
                   {
                     "type": "SYMBOL",
@@ -1287,7 +1295,7 @@
     },
     "function_name": {
       "type": "PATTERN",
-      "value": "(`.*`)|((\\.|~)?(([a-zA-Z_](\\w|['?])+)|([a-zA-Z])))"
+      "value": "(`.*`)|((\\.|~)?(([a-zA-Z_](\\w|['?:])+)|([a-zA-Z])))"
     },
     "impure": {
       "type": "STRING",
@@ -1916,7 +1924,7 @@
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "(`.*`)|([a-zA-Z_](\\w|['?])+)|([a-zA-Z])"
+      "value": "(`.*`)|([a-zA-Z_](\\w|['?:])+)|([a-zA-Z])"
     },
     "underscore": {
       "type": "STRING",
