@@ -127,9 +127,8 @@ module.exports = {
   )),
 
   unit_literal: $ => '()',
-  unit_tuple: $ => '[]',
 
   parenthesized_expression: $ => seq('(', $._expression, ')'),
   tensor_expression: $ => seq('(', commaSep2($._expression), ')'),
-  tuple_expression: $ => seq('[', commaSep1($._expression), ']'),
+  tuple_expression: $ => seq('[', commaSep($._expression), ']'),
 }

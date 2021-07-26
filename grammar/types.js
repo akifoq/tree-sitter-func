@@ -18,6 +18,7 @@ module.exports = {
     $.hole_type,
     $.type_identifier,
     $.tensor_type,
+    $.unit_type,
     $.tuple_type,
     $._parenthesized_type
   ),
@@ -33,10 +34,7 @@ module.exports = {
     'tuple',
   ),
 
-  tensor_type: $ => choice(
-    '()',
-    seq('(', commaSep2($._type), ')')
-  ),
+  tensor_type: $ => seq('(', commaSep2($._type), ')'),
 
   tuple_type: $ => seq('[', commaSep($._type), ']'),
 

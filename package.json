@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-func-language",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "FunC grammar for node-tree-sitter",
   "repository": "github:akifoq/tree-sitter-func",
   "main": "bindings/node",
