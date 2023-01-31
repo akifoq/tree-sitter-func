@@ -2,6 +2,11 @@
 name = "tree-sitter-c"
 description = "c grammar for the tree-sitter parsing library"
 version = "0.0.1"
+authors = [
+	"akifoq <akifoq@protonmail.com>",
+	"Amaan Qureshi <amaanq12@gmail.com>",
+	"Dan Volkov <die.marmelade@yandex.ru>",
+]
 keywords = ["incremental", "parsing", "c"]
 categories = ["parsing", "text-editors"]
 repository = "https://github.com/tree-sitter/tree-sitter-javascript"
@@ -9,18 +14,13 @@ edition = "2018"
 license = "MIT"
 
 build = "bindings/rust/build.rs"
-include = [
-  "bindings/rust/*",
-  "grammar.js",
-  "queries/*",
-  "src/*",
-]
+include = ["bindings/rust/*", "grammar.js", "queries/*", "src/*"]
 
 [lib]
 path = "bindings/rust/lib.rs"
 
 [dependencies]
-tree-sitter = "0.19.3"
+tree-sitter = "~0.20.3"
 
 [build-dependencies]
 cc = "1.0"
