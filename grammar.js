@@ -1,8 +1,14 @@
-const {commaSep, commaSep1, commaSep2} = require('./grammar/utils.js')
-const types = require('./grammar/types.js')
-const expressions = require('./grammar/expressions.js')
-const functions = require('./grammar/functions.js')
-const statements = require('./grammar/statements.js')
+/* eslint-disable arrow-parens */
+/* eslint-disable camelcase */
+/* eslint-disable-next-line spaced-comment */
+/// <reference types="tree-sitter-cli/dsl" />
+// @ts-check
+
+const {commaSep1} = require('./grammar/utils.js');
+const types = require('./grammar/types.js');
+const expressions = require('./grammar/expressions.js');
+const functions = require('./grammar/functions.js');
+const statements = require('./grammar/statements.js');
 
 module.exports = grammar({
   name: 'func',
@@ -19,18 +25,58 @@ module.exports = grammar({
 
     _top_level_item: $ => choice(
       $.function_definition,
-      $.global_var_declarations
+      $.include_directive,
+      $.pragma_directive,
+      $.global_var_declarations,
+      $.const_var_declarations,
+    ),
+
+    include_directive: $ => seq(
+      '#include',
+      alias($._string_literal, $.include_path),
+      ';',
+    ),
+
+    pragma_directive: $ => seq(
+      '#pragma',
+      choice('version', 'not-version', 'test-version-set'),
+      optional(alias(/(\^|<=|>=|<|>|=)/, $.version_operator)),
+      optional('"'),
+      alias(/\d/, $.major_version),
+      optional(
+        seq(
+          '.',
+          // Rename if incorrect
+          alias(/\d/, $.minor_version),
+          optional(seq('.', alias(/\d/, $.patch_version))),
+        ),
+      ),
+      optional('"'),
+      ';',
     ),
 
     global_var_declarations: $ => seq(
       'global',
       commaSep1($._global_var_declaration),
-      ';'
+      ';',
+    ),
+
+    const_var_declarations: $ => seq(
+      'const',
+      optional(field('type', $._type)),
+      commaSep1($._const_var_declaration),
+      ';',
     ),
 
     _global_var_declaration: $ => seq(
       field('type', optional($._type)),
       field('name', $.identifier),
+    ),
+
+    _const_var_declaration: $ => seq(
+      field('name', $.identifier),
+      '=',
+      field('value', $._expression),
     ),
 
     ...types,
