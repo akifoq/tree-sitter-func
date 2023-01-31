@@ -1,85 +1,191 @@
-(impure) @keyword
-"inline" @keyword
-"inline_ref" @keyword
-"method_id" @keyword
-"asm" @keyword
-"global" @keyword
-"forall" @keyword
-"return" @keyword
-"repeat" @keyword
-"do" @keyword
-"until" @keyword
-"while" @keyword
-"if" @keyword
-"ifnot" @keyword
-"else" @keyword
-"elseif" @keyword
-"elseifnot" @keyword
+; Include
 
-"=" @operator
-"+=" @operator
-"-=" @operator
-"*=" @operator
-"/=" @operator
-"~/=" @operator
-"^/=" @operator
-"%=" @operator
-"~%=" @operator
-"^%=" @operator
-"<<=" @operator
-">>=" @operator
-"~>>=" @operator
-"^>>=" @operator
-"&=" @operator
-"|=" @operator
-"^=" @operator
+"#include" @include
+(include_path) @string
 
-"==" @operator
-"<" @operator
-">" @operator
-"<=" @operator
-">=" @operator
-"!=" @operator
-"<=>" @operator
-"<<" @operator
-">>" @operator
-"~>>" @operator
-"^>>" @operator
-"-" @operator
-"+" @operator
-"|" @operator
-"^" @operator
-"*" @operator
-"/" @operator
-"%" @operator
-"~/" @operator
-"^/" @operator
-"~%" @operator
-"^%" @operator
-"/%" @operator
-"&" @operator
-"~" @operator
-"." @operator
+; Preproc
 
-"->" @operator
+[
+  "#pragma"
+]@preproc
 
+(pragma_directive [
+				   "version"
+				   "not-version"
+				   "test-version-set"
+				   ] @preproc)
 
-(string_literal) @string
-(asm_instruction) @string
-(number_literal) @number
+; Functions/Methods
 
 (function_definition
   name: (function_name) @function)
+
 (function_application
   function: (identifier) @function)
-(method_call
-  method_name: (identifier) @function)
 
-"type" @type
-(type_identifier) @type
-(primitive_type) @type
-(var_type) @type
+(method_call
+  method_name: (identifier) @method.call)
+
+; Parameters
+
+(parameter) @parameter
+(function_application
+  arguments: [(identifier) (underscore)] @parameter)
+(function_application
+  arguments: (tensor_expression 
+			   (identifier) @parameter))
+(function_application
+  arguments: (parenthesized_expression
+			   (identifier) @parameter))
+(method_call
+  arguments: [(identifier) (underscore)] @parameter)
+(method_call
+  arguments: (tensor_expression 
+			   (identifier) @parameter))
+(method_call
+  arguments: (parenthesized_expression
+			   (identifier) @parameter))
+
+; Constants
+
+(const_var_declarations
+  name: (identifier) @constant)
+(unit_literal) @constant.builtin
+
+; Variables
 
 (identifier) @variable
 
-(comment) @comment
+; Types
+
+(type_identifier) @type
+(primitive_type) @type.builtin
+(unit_type) @type.builtin
+
+; Operators
+
+[
+  "="
+  "+="
+  "-="
+  "*="
+  "/="
+  "~/="
+  "^/="
+  "%="
+  "~%="
+  "^%="
+  "<<="
+  ">>="
+  "~>>="
+  "^>>="
+  "&="
+  "|="
+  "^="
+  "=="
+  "<"
+  ">"
+  "<="
+  ">="
+  "!="
+  "<=>"
+  "<<"
+  ">>"
+  "~>>"
+  "^>>"
+  "-"
+  "+"
+  "|"
+  "^"
+  "*"
+  "/"
+  "%"
+  "~/"
+  "^/"
+  "~%"
+  "^%"
+  "/%"
+  "&"
+  "~"
+] @operator
+
+; Keywords
+
+[
+  "asm"
+  "impure"
+  "inline"
+  "inline_ref"
+  "method_id"
+  "try"
+  "type"
+] @keyword
+
+[
+  "return"
+] @keyword.return
+
+; Conditionals
+
+[
+  "if"
+  "ifnot"
+  "else"
+  "elseif"
+  "elseifnot"
+  "until"
+] @conditional
+
+; Exceptions
+
+[
+  "catch"
+] @exception
+
+; Repeats
+
+[
+  "do"
+  "forall"
+  "repeat"
+  "while"
+] @repeat
+
+; Qualifiers
+[
+  "const"
+  "global"
+  (var)
+] @type.qualifier
+
+; Literals
+
+[
+  (string)
+  (asm_instruction)
+] @string
+
+[
+  (string_type)
+  (underscore)
+] @character.special
+
+(number) @number
+
+; Punctuation
+
+["{" "}"] @punctuation.bracket
+
+["(" ")"] @punctuation.bracket
+
+["[" "]"] @punctuation.bracket
+
+[
+  ";"
+  ","
+  "->"
+] @punctuation.delimiter
+
+; Comments
+
+(comment) @comment @spell
