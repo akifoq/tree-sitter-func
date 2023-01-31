@@ -1,30 +1,45 @@
 {
   "name": "tree-sitter-func-language",
   "version": "0.2.0",
-  "description": "FunC grammar for node-tree-sitter",
-  "repository": "github:akifoq/tree-sitter-func",
+  "description": "FunC grammar for tree-sitter",
   "main": "bindings/node",
   "keywords": [
     "parser",
-    "lexer"
+    "lexer",
+    "FunC"
   ],
   "author": "akifoq",
+  "contributors": [
+    "Amaan Qureshi <amaanq12@gmail.com>",
+    "Dan Volkov <die.marmelade@yandex.ru>"
+  ],
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/akifoq/tree-sitter-func/issues"
+  },
   "dependencies": {
     "nan": "^2.15.0"
   },
   "devDependencies": {
+    "eslint": "^8.33.0",
+    "eslint-config-google": "^0.14.0",
     "tree-sitter-cli": "^0.19.5"
   },
+  "repository": "https://github.com/akifoq/tree-sitter-func",
   "scripts": {
     "build": "tree-sitter generate && node-gyp build",
-    "test": "tree-sitter test"
+    "test": "tree-sitter test && script/parse-examples",
+    "parse": "tree-sitter parse",
+    "test-windows": "tree-sitter test"
   },
   "tree-sitter": [
     {
       "scope": "source.func",
       "file-types": [
         "fc"
+      ],
+      "highlights": [
+        "queries/highlights.scm"
       ]
     }
   ]
