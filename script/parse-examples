@@ -33,4 +33,3 @@ success_percent=$(bc -l <<< "100*${success_count}/${example_count}")
 printf \
   "Successfully parsed %d of %d example files (%.1f%%)\n" \
   $success_count "$example_count" "$success_percent"
-

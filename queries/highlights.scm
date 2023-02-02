@@ -7,13 +7,14 @@
 
 [
   "#pragma"
-]@preproc
+] @preproc
 
-(pragma_directive [
-				   "version"
-				   "not-version"
-				   "test-version-set"
-				   ] @preproc)
+(pragma_directive
+  [
+    "version"
+    "not-version"
+    "test-version-set"
+  ] @preproc)
 
 ; Functions/Methods
 
@@ -29,22 +30,24 @@
 ; Parameters
 
 (parameter) @parameter
+
 (function_application
   arguments: [(identifier) (underscore)] @parameter)
 (function_application
   arguments: (tensor_expression 
-			   (identifier) @parameter))
+               (identifier) @parameter))
 (function_application
   arguments: (parenthesized_expression
-			   (identifier) @parameter))
+               (identifier) @parameter))
+
 (method_call
   arguments: [(identifier) (underscore)] @parameter)
 (method_call
   arguments: (tensor_expression 
-			   (identifier) @parameter))
+               (identifier) @parameter))
 (method_call
   arguments: (parenthesized_expression
-			   (identifier) @parameter))
+               (identifier) @parameter))
 
 ; Constants
 
