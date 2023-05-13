@@ -1,85 +1,175 @@
-(impure) @keyword
-"inline" @keyword
-"inline_ref" @keyword
-"method_id" @keyword
-"asm" @keyword
-"global" @keyword
-"forall" @keyword
-"return" @keyword
-"repeat" @keyword
-"do" @keyword
-"until" @keyword
-"while" @keyword
-"if" @keyword
-"ifnot" @keyword
-"else" @keyword
-"elseif" @keyword
-"elseifnot" @keyword
+; Include
 
-"=" @operator
-"+=" @operator
-"-=" @operator
-"*=" @operator
-"/=" @operator
-"~/=" @operator
-"^/=" @operator
-"%=" @operator
-"~%=" @operator
-"^%=" @operator
-"<<=" @operator
-">>=" @operator
-"~>>=" @operator
-"^>>=" @operator
-"&=" @operator
-"|=" @operator
-"^=" @operator
+"#include" @include
+(include_path) @string
 
-"==" @operator
-"<" @operator
-">" @operator
-"<=" @operator
-">=" @operator
-"!=" @operator
-"<=>" @operator
-"<<" @operator
-">>" @operator
-"~>>" @operator
-"^>>" @operator
-"-" @operator
-"+" @operator
-"|" @operator
-"^" @operator
-"*" @operator
-"/" @operator
-"%" @operator
-"~/" @operator
-"^/" @operator
-"~%" @operator
-"^%" @operator
-"/%" @operator
-"&" @operator
-"~" @operator
-"." @operator
+; Preproc
 
-"->" @operator
+[
+  "#pragma"
+] @preproc
 
+(pragma_directive
+  [
+    "version"
+    "not-version"
+    "test-version-set"
+  ] @preproc)
 
-(string_literal) @string
-(asm_instruction) @string
-(number_literal) @number
+; Keywords
 
-(function_definition
-  name: (function_name) @function)
-(function_application
-  function: (identifier) @function)
-(method_call
-  method_name: (identifier) @function)
+[
+  "asm"
+  "impure"
+  "inline"
+  "inline_ref"
+  "method_id"
+  "type"
+] @keyword
 
-"type" @type
-(type_identifier) @type
-(primitive_type) @type
-(var_type) @type
+[
+  "return"
+] @keyword.return
+
+; Conditionals
+
+[
+  "if"
+  "ifnot"
+  "else"
+  "elseif"
+  "elseifnot"
+  "until"
+] @conditional
+
+; Exceptions
+
+[
+  "try"
+  "catch"
+] @exception
+
+; Repeats
+
+[
+  "do"
+  "forall"
+  "repeat"
+  "while"
+] @repeat
+
+; Qualifiers
+[
+  "const"
+  "global"
+  (var)
+] @type.qualifier
+
+; Variables
 
 (identifier) @variable
 
-(comment) @comment
+; Constants
+
+(const_var_declarations
+  name: (identifier) @constant)
+
+; Functions/Methods
+
+(function_definition
+  name: (function_name) @function)
+
+(function_application
+  function: (identifier) @function)
+
+(method_call
+  method_name: (identifier) @method.call)
+
+; Parameters
+
+(parameter) @parameter
+
+; Types
+
+(type_identifier) @type
+
+(primitive_type) @type.builtin
+
+; Operators
+
+[
+  "="
+  "+="
+  "-="
+  "*="
+  "/="
+  "~/="
+  "^/="
+  "%="
+  "~%="
+  "^%="
+  "<<="
+  ">>="
+  "~>>="
+  "^>>="
+  "&="
+  "|="
+  "^="
+  "=="
+  "<"
+  ">"
+  "<="
+  ">="
+  "!="
+  "<=>"
+  "<<"
+  ">>"
+  "~>>"
+  "^>>"
+  "-"
+  "+"
+  "|"
+  "^"
+  "*"
+  "/"
+  "%"
+  "~/"
+  "^/"
+  "~%"
+  "^%"
+  "/%"
+  "&"
+  "~"
+] @operator
+
+; Literals
+
+[
+  (string)
+  (asm_instruction)
+] @string
+
+[
+  (string_type)
+  (underscore)
+] @character.special
+
+(number) @number
+
+; Punctuation
+
+["{" "}"] @punctuation.bracket
+
+["(" ")" "()"] @punctuation.bracket
+
+["[" "]"] @punctuation.bracket
+
+[
+  ";"
+  ","
+  "->"
+] @punctuation.delimiter
+
+; Comments
+
+(comment) @comment @spell

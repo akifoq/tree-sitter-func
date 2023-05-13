@@ -1,4 +1,6 @@
-const {commaSep, commaSep1, commaSep2} = require('./utils.js')
+/* eslint-disable arrow-parens */
+
+const {commaSep} = require('./utils');
 
 module.exports = {
   _statement: $ => choice(
@@ -10,37 +12,56 @@ module.exports = {
     $.if_statement,
     $.do_statement,
     $.while_statement,
+    $.try_statement,
   ),
 
   return_statement: $ => seq('return', $._expression, ';'),
   block_statement: $ => seq('{', repeat($._statement), '}'),
   expression_statement: $ => seq($._expression, ';'),
-  empty_statement: $ => ';',
-  repeat_statement: $ => seq('repeat', field("count", $._expression), field("body", $.block_statement)),
+  empty_statement: _ => ';',
+  repeat_statement: $ =>
+    seq(
+      'repeat',
+      field('count', $._expression),
+      field('body', $.block_statement),
+    ),
 
   if_statement: $ => seq(
     choice('if', 'ifnot'),
-    $._if_statement_contents
+    $._if_statement_contents,
   ),
   _if_statement_contents: $ => seq(
-    field("condition", $._expression),
-    field("consequent", $.block_statement),
-    field("alternative",
+    field('condition', $._expression),
+    field('consequent', $.block_statement),
+    field('alternative',
       optional(choice(
-        seq("else", $.block_statement),
-        seq(choice("elseif", "elseifnot"), $._if_statement_contents)
-    )))
+        seq('else', $.block_statement),
+        seq(choice('elseif', 'elseifnot'), $._if_statement_contents),
+      ))),
   ),
 
   do_statement: $ => seq(
-    "do",
-    field("body", $.block_statement),
-    "until",
-    field("postcondition", $._expression)
+    'do',
+    field('body', $.block_statement),
+    'until',
+    field('postcondition', $._expression),
   ),
   while_statement: $ => seq(
-    "while",
-    field("precondition", $._expression),
-    field("body", $.block_statement)
-  )
-}
+    'while',
+    field('precondition', $._expression),
+    field('body', $.block_statement),
+  ),
+
+  try_statement: $ =>
+    seq(
+      'try',
+      '{',
+      repeat($._statement),
+      '}',
+      'catch',
+      seq('(', commaSep($.identifier), ')'),
+      '{',
+      repeat($._statement),
+      '}',
+    ),
+};
