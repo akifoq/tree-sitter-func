@@ -1,5 +1,5 @@
 {
-  "name": "tree-sitter-func-language",
+  "name": "@amaanq/tree-sitter-func",
   "version": "0.2.0",
   "description": "FunC grammar for tree-sitter",
   "main": "bindings/node",
@@ -15,26 +15,28 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/akifoq/tree-sitter-func/issues"
+    "url": "https://github.com/amaanq/tree-sitter-func/issues"
   },
   "dependencies": {
     "nan": "^2.15.0"
   },
   "devDependencies": {
-    "eslint": "^8.33.0",
+    "eslint": "^8.40.0",
     "eslint-config-google": "^0.14.0",
-    "tree-sitter-cli": "^0.20.0"
+    "tree-sitter-cli": "^0.20.8"
   },
-  "repository": "https://github.com/akifoq/tree-sitter-func",
+  "repository": "https://github.com/amaanq/tree-sitter-func",
   "scripts": {
     "build": "tree-sitter generate && node-gyp build",
-    "test": "tree-sitter test && script/parse-examples",
+    "lint": "eslint grammar.js",
     "parse": "tree-sitter parse",
+    "test": "tree-sitter test && script/parse-examples",
     "test-windows": "tree-sitter test"
   },
   "tree-sitter": [
     {
       "scope": "source.func",
+      "injection-regex": "^(fc|func)$",
       "file-types": [
         "fc"
       ],
